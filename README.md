@@ -1,7 +1,3 @@
-The existing README is comprehensive, but I'll make some refinements for clarity, particularly in **Project Structure** and **Usage** sections, while also adding better organization and a few extra explanations. Here’s the updated README:
-
----
-
 # PowerOP: Intelligent Power Management System
 
 ## Overview
@@ -141,7 +137,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any inquiries or suggestions, please reach out to the project maintainer:
 - **Name**: Jsh Agarwal
 - **Email**: [jshagarwal15@gmail.com](mailto:jshagarwal15@gmail.com)
-
---- 
-
-This README should make PowerOP easily understandable and maintainable, providing a clear roadmap for setting up, using, and contributing to the project. Let me know if you need further adjustments!
