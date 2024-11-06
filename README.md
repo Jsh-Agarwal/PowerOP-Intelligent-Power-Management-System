@@ -109,8 +109,15 @@ Compile and run `Finalcode.c` on the embedded hardware to implement real-time po
 ---
 
 ## Results
+1.
+![Figure_9](https://github.com/user-attachments/assets/5837a05b-3ad8-4bf9-9e65-72ba3d405710)
 
-Sample results are visualized in `output/output.png`, demonstrating the model's efficacy in power optimization.
+2.
+![Figure_10](https://github.com/user-attachments/assets/04f52cbe-20a8-4494-a03b-ccea89f210eb)
+
+3.
+![Figure_3](https://github.com/user-attachments/assets/5fb2e042-7497-4d50-85e7-1b32d567014c)
+
 
 ---
 
