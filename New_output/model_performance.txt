@@ -1,0 +1,5 @@
+LSTM Model Performance:
+Mean Absolute Error: 0.039343680873036205
+Mean Squared Error: 0.0028781117213889144
+Root Mean Squared Error: 0.05364803557809843
+R^2 Score: 0.9970345244553621
