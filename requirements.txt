@@ -1,5 +1,11 @@
 numpy
 pandas
-matplotlib
 scikit-learn
 xgboost
+lightgbm
+tensorflow
+shap
+matplotlib
+seaborn
+fbprophet
+joblib
