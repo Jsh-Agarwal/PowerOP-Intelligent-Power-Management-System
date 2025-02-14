@@ -6,8 +6,8 @@
 #include <ArduinoJson.h>
 
 // WiFi Credentials
-const char *ssid = "Nothing phone (2a)";
-const char *password = "JAGDISH3456";
+const char *ssid = "SSID";
+const char *password = "PASSWORD";
 
 // Azure IoT Hub Credentials (Using SAS Token)
 #define IOT_HUB_NAME "SmartHVAC.azure-devices.net"
