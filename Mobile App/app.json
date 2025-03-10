@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "My V0 Project",
+    "slug": "my-v0-project",
+    "newArchEnabled": true,
+    "updates": {
+      "enabled": true,
+      "url": "https://u.expo.dev/398a70ad-db99-4b5b-989e-167b9e03beb6"
+    },
+    "android": {
+      "package": "com.anonymous.myv0project"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "398a70ad-db99-4b5b-989e-167b9e03beb6"
+      }
+    },
+    "runtimeVersion": "1.0.0",  
+    "ios": {}
+  }
+}

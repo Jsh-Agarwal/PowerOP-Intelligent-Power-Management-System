@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+    environment:
+      - PYTHONPATH=/app
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - ASTRA_DB_TOKEN=${ASTRA_DB_TOKEN}
+      - ASTRA_DB_API_ENDPOINT=${ASTRA_DB_API_ENDPOINT}
+      - ASTRA_DB_KEYSPACE=${ASTRA_DB_KEYSPACE}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

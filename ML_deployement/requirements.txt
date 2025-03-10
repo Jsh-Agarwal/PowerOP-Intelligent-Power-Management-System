@@ -1,0 +1,73 @@
+# API Framework
+fastapi
+uvicorn
+starlette
+python-multipart
+pydantic
+gunicorn
+
+# Machine Learning
+tensorflow-cpu
+numpy
+pandas
+scikit-learn
+joblib
+
+# Database
+cassandra-driver
+aiohttp
+python-dotenv
+
+# API Rate Limiting
+ratelimit
+cachetools
+
+# Testing
+pytest
+pytest-asyncio
+pytest-cov
+httpx
+pytest-mock
+locust
+
+# Real-time Processing
+websockets
+asyncio
+
+# Data Processing
+scipy
+plotly
+PyYAML
+matplotlib
+seaborn
+
+# Security
+python-jose
+passlib[bcrypt]
+python-multipart
+PyJWT
+
+# Monitoring and Logging
+prometheus-client
+python-json-logger
+
+# Development Tools
+black
+isort
+flake8
+mypy
+
+# Documentation
+mkdocs
+mkdocs-material
+
+tenacity
+astrapy
+backoff
+
+# Additional Dependencies
+groq
+requests
+
+# Async support
+async-timeout; python_version < '3.11'

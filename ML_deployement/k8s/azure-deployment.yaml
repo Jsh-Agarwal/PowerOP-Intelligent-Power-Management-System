@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: powerop-ml
+  labels:
+    app: powerop-ml
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: powerop-ml
+  template:
+    metadata:
+      labels:
+        app: powerop-ml
+    spec:
+      containers:
+      - name: powerop-ml
+        image: hvac040325.azurecr.io/powerop-ml:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: GROQ_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: powerop-secrets
+              key: GROQ_API_KEY
+        - name: ASTRA_DB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: powerop-secrets
+              key: ASTRA_DB_TOKEN
+        - name: ASTRA_DB_API_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: powerop-secrets
+              key: ASTRA_DB_API_ENDPOINT
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 60
+          periodSeconds: 15
+      imagePullSecrets:
+      - name: acr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: powerop-ml
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: powerop-ml
+

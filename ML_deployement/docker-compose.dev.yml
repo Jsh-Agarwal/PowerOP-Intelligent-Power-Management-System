@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app:cached
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=development
+      - TF_CPP_MIN_LOG_LEVEL=2
+      - PYTHONDEVMODE=1
+    command: python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+
+volumes:
+  redis_data:

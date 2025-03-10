@@ -1,0 +1,53 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+.venv/
+
+# Project specific
+logs/
+Results/
+reports/
+test_data/
+data/
+static/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Test coverage
+.coverage
+htmlcov/
+coverage.xml
+
+# Local configurations
+config/local.yml
+*.local.yml
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+.DS_Store
+
+

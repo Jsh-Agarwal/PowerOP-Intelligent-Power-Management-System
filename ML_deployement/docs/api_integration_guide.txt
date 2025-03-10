@@ -1,0 +1,263 @@
+PowerOP_ML API Integration Guide
+==============================
+
+Base URL: http://localhost:8000
+
+1. Authentication
+----------------
+Endpoint: POST /token
+Description: Get authentication token
+Request:
+{
+    "username": "test",
+    "password": "test"
+}
+Response:
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "token_type": "bearer"
+}
+
+2. Temperature Management
+------------------------
+
+2.1 Current Temperature
+Endpoint: GET /api/temperature/current
+Headers: Authorization: Bearer <token>
+Query Params:
+- device_id: string
+- zone_id: string
+Response:
+{
+    "temperature": 23.5,
+    "humidity": 50.0,
+    "timestamp": "2025-03-01T00:00:00Z",
+    "device_id": "test_device",
+    "zone_id": "main"
+}
+
+2.2 Temperature History
+Endpoint: GET /api/temperature/history
+Headers: Authorization: Bearer <token>
+Query Params:
+- device_id: string
+- zone_id: string
+- start_time: ISO datetime (optional)
+- end_time: ISO datetime (optional)
+Response:
+{
+    "history": [
+        {
+            "temperature": 23.5,
+            "humidity": 50.0,
+            "timestamp": "2025-03-01T00:00:00Z",
+            "device_id": "test_device",
+            "zone_id": "main"
+        },
+        ...
+    ],
+    "count": 24
+}
+
+3. Analysis Endpoints
+-------------------
+
+3.1 Anomaly Detection
+Endpoint: POST /api/analysis/anomaly/detect/{system_id}
+Headers: Authorization: Bearer <token>
+Request:
+{
+    "data": [
+        {
+            "timestamp": "2025-03-01T00:00:00Z",
+            "temperature": 23.5,
+            "humidity": 50.0,
+            "power": 1000.0,
+            "pressure": 101.3
+        }
+    ]
+}
+Response:
+{
+    "system_id": "test_system",
+    "anomalies": [
+        {
+            "timestamp": "2025-03-01T00:00:00Z",
+            "is_anomaly": "true",
+            "score": 0.95,
+            "details": {},
+            "metrics": {
+                "temperature": 23.5,
+                "humidity": 50.0,
+                "power": 1000.0,
+                "pressure": 101.3
+            }
+        }
+    ],
+    "summary": {
+        "total_points": 1,
+        "anomalies_found": 1,
+        "threshold_used": 0.95
+    }
+}
+
+3.2 Cost Analysis
+Endpoint: GET /api/analysis/cost/{system_id}
+Headers: Authorization: Bearer <token>
+Query Params:
+- start_time: ISO datetime (optional)
+- end_time: ISO datetime (optional)
+Response:
+{
+    "status": "success",
+    "system_id": "test_system",
+    "period": {
+        "start": "2025-02-22T20:41:10.427441",
+        "end": "2025-03-01T20:41:10.427441"
+    },
+    "analysis": {
+        "total_energy_kwh": 426919.1,
+        "total_cost": 64037.87,
+        "average_daily_cost": 9094.13,
+        "peak_usage_kwh": 426919.1,
+        "peak_usage_cost": 64037.87,
+        "efficiency_score": 0.85
+    },
+    "recommendations": [
+        {
+            "type": "peak_usage",
+            "message": "Consider shifting load to off-peak hours",
+            "potential_savings": "10-15%"
+        }
+    ]
+}
+
+3.3 LLM Analysis
+Endpoint: POST /api/analysis/optimize/llm/{system_id}
+Headers: Authorization: Bearer <token>
+Request:
+{
+    "query": "Analyze system efficiency",
+    "context": {
+        "temperature": 23.5,
+        "power": 1000.0,
+        "runtime_hours": 24
+    }
+}
+Response:
+{
+    "status": "success",
+    "data": {
+        "analysis": [
+            "System is operating efficiently",
+            "Minor optimization opportunities found",
+            "Consider adjusting schedule"
+        ],
+        "confidence": 0.92,
+        "suggestions": [
+            "Implement temperature setbacks",
+            "Update maintenance schedule",
+            "Monitor filter status"
+        ]
+    }
+}
+
+4. System Control
+----------------
+
+4.1 Set Temperature
+Endpoint: POST /api/control/temperature
+Headers: Authorization: Bearer <token>
+Request:
+{
+    "system_id": "test_system",
+    "temperature": 22.5,
+    "mode": "cool"
+}
+Response:
+{
+    "status": "success",
+    "current_temperature": 22.5,
+    "mode": "cool",
+    "system_id": "test_system"
+}
+
+4.2 Power Control
+Endpoint: POST /api/control/power
+Headers: Authorization: Bearer <token>
+Request:
+{
+    "system_id": "test_system",
+    "state": true
+}
+Response:
+{
+    "status": "success",
+    "power_state": true,
+    "system_id": "test_system"
+}
+
+5. System Monitoring
+-------------------
+
+5.1 System Health
+Endpoint: GET /api/health
+Headers: Authorization: Bearer <token>
+Response:
+{
+    "status": "healthy",
+    "timestamp": "2025-03-01T14:44:51.413511",
+    "version": "1.0.0",
+    "services": {
+        "database": {
+            "status": "healthy",
+            "last_checked": "2025-03-01T14:44:51.413511"
+        },
+        "weather": {
+            "status": "healthy",
+            "last_checked": "2025-03-01T14:44:51.413511"
+        },
+        "ml_model": {
+            "status": "healthy",
+            "last_checked": "2025-03-01T14:44:51.413511"
+        }
+    }
+}
+
+5.2 System Metrics
+Endpoint: GET /api/status/metrics
+Headers: Authorization: Bearer <token>
+Query Params:
+- system_id: string
+- start_time: ISO datetime (optional)
+- end_time: ISO datetime (optional)
+Response:
+{
+    "status": "success",
+    "data": {
+        "metrics": [...],
+        "summary": {
+            "total_energy": 1234.56,
+            "avg_power": 567.89,
+            "efficiency": 0.85,
+            "duration": 24.0
+        }
+    },
+    "system_id": "test_system",
+    "period": {
+        "start": "2025-03-01T00:00:00Z",
+        "end": "2025-03-02T00:00:00Z"
+    }
+}
+
+Note: All datetime fields should be in ISO format (YYYY-MM-DDTHH:mm:ssZ)
+All endpoints require Bearer token authentication
+Error responses follow the format:
+{
+    "status": "error",
+    "detail": {
+        "message": "Error description",
+        "error_code": "ERROR_CODE",
+        "timestamp": "2025-03-01T00:00:00Z"
+    }
+}
